@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
-import { authMock } from "../../authMock";
+import { authMock } from "../../mock/authMock";
 
 const initialValue = {
 	username: "",
@@ -14,15 +14,20 @@ const initialValue = {
 
 const validationSchema = yup.object({
 	username: yup
-		.string("Enter your username")
+		.string()
 		.required("Username is required"),
 	password: yup
-		.string("Enter your password")
+		.string()
 		.min(5, "Password should be of minimum 5 characters length")
 		.required("Password is required"),
 });
 
-export default function LoginModal({ open, handleClose }) {
+type LoginModalType = {
+	open: boolean;
+	handleClose: () => void;
+}
+
+export default function LoginModal({ open, handleClose }: LoginModalType) {
 	const navigate = useNavigate();
 
 	return (

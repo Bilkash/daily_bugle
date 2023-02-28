@@ -1,10 +1,15 @@
 import React from "react";
 import { Container, Toolbar, Typography } from "@mui/material";
-import PropTypes from "prop-types";
+
 import HeaderLink from "../HeaderLink";
 import Profile from "../Profile";
+import { SectionLinkType } from "../../types";
 
-export default function Header({ sections }) {
+type HeaderType = {
+	sections: SectionLinkType[];
+}
+
+export default function Header({ sections }: HeaderType) {
 	return (
 		<React.Fragment>
 			<Container maxWidth="lg">
@@ -48,12 +53,3 @@ export default function Header({ sections }) {
 		</React.Fragment>
 	);
 }
-
-Header.propTypes = {
-	sections: PropTypes.arrayOf(
-		PropTypes.shape({
-			title: PropTypes.string.isRequired,
-			url: PropTypes.string.isRequired
-		})
-	).isRequired
-};

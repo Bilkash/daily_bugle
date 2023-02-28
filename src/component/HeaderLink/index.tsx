@@ -1,9 +1,14 @@
 import React from "react";
 import { Link as MaterialLink } from "@mui/material";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
-export default function HeaderLink({ section }) {
+import { SectionLinkType } from "../../types";
+
+type HeaderLinkType = {
+	section: SectionLinkType
+};
+
+export default function HeaderLink({ section }: HeaderLinkType) {
 	return (
 		<Link style={{ textDecoration: "none" }} to={section.url}>
 			<MaterialLink
@@ -13,10 +18,3 @@ export default function HeaderLink({ section }) {
 		</Link>
 	);
 }
-
-HeaderLink.propTypes = {
-	section: PropTypes.shape({
-		title: PropTypes.string.isRequired,
-		url: PropTypes.string.isRequired
-	}).isRequired
-};

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
+
 import HeaderLink from "../HeaderLink";
 import LoginModal from "../LoginModal";
 
 export default function Profile() {
-	const [ username, setUserName ] = useState("");
-	const [open, setOpen] = useState(false);
+	const [ username, setUserName ] = useState<string>("");
+	const [open, setOpen] = useState<boolean>(false);
 	const user = localStorage.getItem("username");
 
 	const handleOpen = () => setOpen(true);

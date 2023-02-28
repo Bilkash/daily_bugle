@@ -1,5 +1,6 @@
 {
   "root": true,
+  "parser": "@typescript-eslint/parser",
   "env": {
     "browser": true,
     "es2021": true,
@@ -7,7 +8,9 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -16,12 +19,23 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "import"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": ["off"],
     "no-undef": ["error"],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          ["builtin", "external"],
+          "internal",
+          ["parent", "sibling", "index"]
+        ],
+        "newlines-between": "always"
+      }
+    ],
     "indent": [
       "error",
       "tab"

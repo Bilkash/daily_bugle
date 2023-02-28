@@ -1,5 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+
 import { Main, News, Profile } from "../pages";
 import { authLoader } from "./loaders/authLoader";
 
