@@ -1,22 +1,34 @@
 import React from "react";
-import { Container, Toolbar, Typography } from "@mui/material";
+import {
+	Container,
+	FormControl,
+	InputLabel,
+	MenuItem,
+	Select,
+	SelectChangeEvent,
+	Toolbar,
+	Typography
+} from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import HeaderLink from "../HeaderLink";
 import Profile from "../Profile";
-import { SectionLinkType } from "../../types";
 
-type HeaderType = {
-	sections: SectionLinkType[];
-}
+export default function Header() {
+	const { t, i18n } = useTranslation();
 
-export default function Header({ sections }: HeaderType) {
+	const handleLanguageChange = (event: SelectChangeEvent) => {
+		i18n.changeLanguage(event.target.value as string);
+	};
+
 	return (
 		<React.Fragment>
 			<Container maxWidth="lg">
 				<Toolbar
 					sx={{
 						borderBottom: 1,
-						borderColor: "divider"
+						borderColor: "divider",
+						marginTop: "10px"
 					}}
 				>
 					<Typography
@@ -33,6 +45,25 @@ export default function Header({ sections }: HeaderType) {
 					>
 						DAILY BUGLE
 					</Typography>
+
+					<FormControl
+						sx={{
+							position: "absolute",
+							right: 0,
+							width: "100px"
+						}}
+					>
+						<InputLabel>Language</InputLabel>
+						<Select
+							id="demo-simple-select"
+							value={i18n.language}
+							label="Language"
+							onChange={handleLanguageChange}
+						>
+							<MenuItem value={"en"}>EN</MenuItem>
+							<MenuItem value={"ua"}>UA</MenuItem>
+						</Select>
+					</FormControl>
 				</Toolbar>
 				<Toolbar
 					component="nav"
@@ -45,7 +76,9 @@ export default function Header({ sections }: HeaderType) {
 						borderColor: "divider"
 					}}
 				>
-					{sections.map(section => <HeaderLink key={section.title} section={section}/>)}
+					<HeaderLink title={t("home")} url={"/"}/>
+
+					<HeaderLink title={t("news")} url={"/news"}/>
 
 					<Profile/>
 				</Toolbar>

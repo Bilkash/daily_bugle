@@ -2,11 +2,11 @@ import { SectionLinkType } from "../types";
 
 export const headerSections: SectionLinkType[] = [
 	{
-		title: "Home",
+		title: "home",
 		url: "/"
 	},
 	{
-		title: "News",
+		title: "news",
 		url: "/news"
 	},
 ];

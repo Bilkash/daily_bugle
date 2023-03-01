@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Container } from "@mui/material";
 
 import { Footer, Header } from "../component";
-import { headerSections } from "../consts/headerSections";
 
 type LayoutType = {
 	children: React.ReactNode|React.ReactNode[]
@@ -11,7 +10,7 @@ type LayoutType = {
 export default function Layout({ children }: LayoutType) {
 	return (
 		<>
-			<Header sections={headerSections} />
+			<Header />
 
 			<Container maxWidth="lg">
 				<Box sx={{ minHeight: "55vh" }}>{children}</Box>

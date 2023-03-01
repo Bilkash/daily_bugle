@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import HeaderLink from "../HeaderLink";
 import LoginModal from "../LoginModal";
 import { RootState } from "../../redux/store";
 
 export default function Profile() {
+	const { t } = useTranslation();
 	const [open, setOpen] = useState<boolean>(false);
 	const username = useSelector((state: RootState) => state.auth.username);
 
@@ -15,7 +17,7 @@ export default function Profile() {
 
 	if (username) {
 		return (
-			<HeaderLink section={{ title: username, url: "/profile" }}/>
+			<HeaderLink title={username} url={"/profile"}/>
 		);
 	} else {
 		return (
@@ -27,7 +29,7 @@ export default function Profile() {
 					}}
 					onClick={handleOpen}
 				>
-					Log In
+					{t("logIn")}
 				</Box>
 
 				<LoginModal handleClose={handleClose} open={open}/>
