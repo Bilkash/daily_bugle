@@ -5,7 +5,7 @@ import { Footer, Header } from "../component";
 import { headerSections } from "../consts/headerSections";
 
 type LayoutType = {
-	children: React.ReactElement
+	children: React.ReactNode|React.ReactNode[]
 }
 
 export default function Layout({ children }: LayoutType) {
@@ -14,7 +14,7 @@ export default function Layout({ children }: LayoutType) {
 			<Header sections={headerSections} />
 
 			<Container maxWidth="lg">
-				<Box sx={{ height: "100vh" }}>{children}</Box>
+				<Box sx={{ minHeight: "55vh" }}>{children}</Box>
 			</Container>
 
 			<Footer />

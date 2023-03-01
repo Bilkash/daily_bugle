@@ -1,11 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as yup from "yup";
 
 import { authMock } from "../../mock/authMock";
+import { logIn } from "../../redux/authSlice";
+import { LoginModalType } from "../../types";
 
 const initialValue = {
 	username: "",
@@ -22,13 +24,9 @@ const validationSchema = yup.object({
 		.required("Password is required"),
 });
 
-type LoginModalType = {
-	open: boolean;
-	handleClose: () => void;
-}
-
 export default function LoginModal({ open, handleClose }: LoginModalType) {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	return (
 		<>
@@ -63,6 +61,7 @@ export default function LoginModal({ open, handleClose }: LoginModalType) {
 							) {
 								localStorage.setItem("username", values.username);
 								localStorage.setItem("password", values.password);
+								dispatch(logIn(values.username));
 								handleClose();
 								navigate("/profile");
 							}
@@ -135,8 +134,3 @@ export default function LoginModal({ open, handleClose }: LoginModalType) {
 		</>
 	);
 }
-
-LoginModal.propTypes = {
-	open: PropTypes.bool.isRequired,
-	handleClose: PropTypes.func.isRequired
-};

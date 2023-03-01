@@ -1,15 +1,21 @@
 import React from "react";
-import Layout from "../../Layout";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import Layout from "../../Layout";
+import { RootState } from "../../redux/store";
+import { logOut } from "../../redux/authSlice";
 
 export default function Profile() {
 	const navigate = useNavigate();
-	const username = localStorage.getItem("username");
+	const username = useSelector((state: RootState) => state.auth.username);
+	const dispatch = useDispatch();
 
 	const handleLogOut = () => {
 		localStorage.removeItem("username");
 		localStorage.removeItem("password");
+		dispatch(logOut());
 		navigate("/");
 	};
 

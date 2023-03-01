@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
+import { useSelector } from "react-redux";
 
 import HeaderLink from "../HeaderLink";
 import LoginModal from "../LoginModal";
+import { RootState } from "../../redux/store";
 
 export default function Profile() {
-	const [ username, setUserName ] = useState<string>("");
 	const [open, setOpen] = useState<boolean>(false);
-	const user = localStorage.getItem("username");
+	const username = useSelector((state: RootState) => state.auth.username);
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-
-	useEffect(() => {
-		if (user) {
-			setUserName(user);
-		}
-	}, [user]);
 
 	if (username) {
 		return (
@@ -26,7 +21,10 @@ export default function Profile() {
 		return (
 			<>
 				<Box
-					sx={{ fontSize: 24 }}
+					sx={{
+						fontSize: 24,
+						cursor: "pointer"
+					}}
 					onClick={handleOpen}
 				>
 					Log In
